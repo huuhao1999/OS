@@ -77,6 +77,14 @@ trait WPHelper
 
 			if ( $product->is_type( 'variable' ) )
 			{
+if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+    if ( version_compare( WC_VERSION, '3.2', '<' ) ) {
+        //Old version code
+				$variation_id     = $product->get_children();
+				$variable_product = new WC_Product_Variation( reset( $variation_id ) );
+        //Old version code				
+    } else {
+        //New version code
 				$variations = wc_products_array_orderby(
 					$product->get_available_variations( 'objects' ),
 					'price',
@@ -101,6 +109,9 @@ trait WPHelper
 				{
 					$variable_product = $variations_in_stock[ 0 ];
 				}
+		//New version code		
+    }
+}
 
 				$productRegularPrice = $variable_product->get_regular_price();
 				$productSalePrice    = $variable_product->get_sale_price();

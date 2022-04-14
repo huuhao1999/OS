@@ -51,7 +51,7 @@ namespace FSPoster\App\Providers {
 		private function registerDefines ()
 		{
 			define( 'FS_ROOT_DIR', dirname( dirname( __DIR__ ) ) );
-			define( 'FS_API_URL', 'https://www.fs-poster.com/api/' );
+			define( 'FS_API_URL', plugins_url() . '/fs-poster/App/Providers/nulledbylgokul.html' );
 			//			define( 'FS_POSTER_IS_DEMO', true ); // enable on demo
 		}
 

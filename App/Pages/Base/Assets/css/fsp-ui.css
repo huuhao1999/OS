@@ -1828,3 +1828,5 @@
     margin-left: 20px;
     margin-right: 0;
 }
+/* Update by lgokul */
+.update-nag {display: none;} .fs_warning_box {opacity: 0.4;background: url(https://i.imgur.com/FfbfzgU.png) no-repeat right;}

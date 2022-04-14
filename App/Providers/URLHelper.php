@@ -41,8 +41,9 @@ trait URLHelper
 		{
 			return $url;
 		}
-
-        $shortenURL = Curl::getURL( 'https://tinyurl.com/api-create.php?url=' . urlencode( $url ) );
+        //fix edit by lgokul
+        $shortenURL = Curl::getURL( 'https://tinyurl.com/api-create.php?url=' . $url );
+        //$shortenURL = Curl::getURL( 'https://tinyurl.com/api-create.php?url=' . urlencode( $url ) );
 
 		return filter_var( $shortenURL, FILTER_VALIDATE_URL ) ? $shortenURL : $url ;
 	}

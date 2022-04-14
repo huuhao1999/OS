@@ -28,7 +28,6 @@ class BackEnd
 		if ( Helper::canLoadPlugin() )
 		{
 			$this->registerMetaBox();
-			$this->addNewsWidget();
 
 			$this->registerActions();
 			$this->registerBulkAction();
@@ -69,42 +68,6 @@ class BackEnd
 		}
 	}
 
-	private function addNewsWidget ()
-	{
-		add_action( 'wp_dashboard_setup', function () {
-			wp_add_dashboard_widget( 'fsp-news', 'FS Poster', function () {
-				$dataURL = 'https://www.fs-poster.com/api/news/';
-				$expTime = 43200; // In seconds
-
-				try
-				{
-					$cachedData = json_decode( Helper::getOption( 'news_cache', FALSE, TRUE ) );
-					$now        = Date::epoch();
-
-					if ( empty( $cachedData ) || $now - $cachedData->time >= $expTime )
-					{
-						$data = Curl::getContents( $dataURL );
-
-						Helper::setOption( 'news_cache', json_encode( [
-							'time' => $now,
-							'data' => $data
-						] ), TRUE );
-					}
-					else
-					{
-						$data = $cachedData->data;
-					}
-				}
-				catch ( Exception $e )
-				{
-					$data = '';
-				}
-
-				echo $data;
-			} );
-		} );
-	}
-
 	private function enqueueAssets ()
 	{
 		add_action( 'admin_enqueue_scripts', function () {
@@ -141,7 +104,7 @@ class BackEnd
 		if ( ! empty( $activationKey ) )
 		{
 			add_action( 'init', function () use ( $activationKey ) {
-				$updater = new FSCodeUpdater( 'fs-poster', FS_API_URL . 'api.php', $activationKey );
+				//$updater = new FSCodeUpdater( 'fs-poster', FS_API_URL . 'api.php', $activationKey );
 			} );
 		}
 	}

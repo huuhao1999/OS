@@ -97,6 +97,9 @@ class PinterestCookieApi
 			];
 		}
 
+        //fix by lgokul
+        $link = utf8_decode(urldecode("$link"));
+		//fix by lgokul
         $sendData = [
             'options' => [
                 'board_id' => $boardId,
